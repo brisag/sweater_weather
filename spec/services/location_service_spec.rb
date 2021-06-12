@@ -5,7 +5,7 @@ RSpec.describe LocationService do
   it 'can get coordinates for a location', :vcr do
 
     location = 'denver,co'
-    response = LocationService.coordinates(location)
+    response = LocationService.get_coordinates(location)
 
     expect(response).to be_a Hash
     expect(response).to have_key(:results)
@@ -21,7 +21,7 @@ RSpec.describe LocationService do
     expect(response[:results].first[:locations].first[:latLng]).to have_key(:lat)
     expect(response[:results].first[:locations].first[:latLng][:lat]).to be_a Float
     expect(response[:results].first[:locations].first[:latLng][:lat]).to eq(39.738453)
-    
+
     expect(response[:results].first[:locations].first[:latLng]).to have_key(:lng)
     expect(response[:results].first[:locations].first[:latLng][:lng]).to be_a Float
     expect(response[:results].first[:locations].first[:latLng][:lng]).to eq(-104.984853)

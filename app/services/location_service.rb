@@ -1,11 +1,10 @@
 class LocationService
   class << self
-    def coordinates(location)
+    def get_coordinates(location)
       response = conn.get('/geocoding/v1/address') do |req|
         req.params['key'] = ENV['MAPQ_API_KEY']
         req.params['location'] = location
       end
-# binding.pry
       JSON.parse(response.body, symbolize_names: true)
     end
 
