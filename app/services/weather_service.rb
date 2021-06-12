@@ -7,7 +7,6 @@ class WeatherService
         req.params['lon'] = coordinates[:lng]
         req.params['units'] = 'imperial'
       end
-      binding.pry
       parse_data(response)
     end
 

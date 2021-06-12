@@ -8,9 +8,6 @@ RSpec.describe WeatherService, :vcr do
       lng: -104.984853
     }
     weather_coords = WeatherService.weather(coordinates)
-    # keys: => [:lat, :lon, :timezone, :timezone_offset, :current, :minutely, :hourly, :daily, :alerts]
-
-    # daily wther interest :date, :sunrise, :sunset, :max_temp, :min_temp, :conditions, :icon
 
     expect(weather_coords).to be_a Hash
     expect(weather_coords).to have_key(:lat)
@@ -19,72 +16,42 @@ RSpec.describe WeatherService, :vcr do
     expect(weather_coords).to have_key(:lon)
     expect(weather_coords[:lon]).to be_a Numeric
     expect(weather_coords[:lon]).to eq(coordinates[:lng].round(4))
-
-    weather_coords[:current]
- #    => [:dt,
-   # :sunrise,
-   # :sunset,
-   # :temp,
-   # :feels_like,
-   # :pressure,
-   # :humidity,
-   # :dew_point,
-   # :uvi,
-   # :clouds,
-   # :visibility,
-   # :wind_speed,
-   # :wind_deg,
-   # :wind_gust,
-   # :weather]
     expect(weather_coords).to have_key(:current)
-    expect(weather_coords[:current]).to be_a Hash
-    expect(weather_coords[:current]).to have_key(:dt)
-    expect(weather_coords[:current][:dt]).to be_an Integer
-    expect(weather_coords[:current]).to have_key(:sunrise)
-    expect(weather_coords[:current][:sunrise]).to be_an Integer
-    expect(weather_coords[:current]).to have_key(:sunset)
-    expect(weather_coords[:current][:sunset]).to be_an Integer
-    expect(weather_coords[:current]).to have_key(:temp)
-    expect(weather_coords[:current][:temp]).to be_a Numeric
-    expect(weather_coords[:current]).to have_key(:feels_like)
-    expect(weather_coords[:current][:feels_like]).to be_a Numeric
-    expect(weather_coords[:current]).to have_key(:humidity)
-    expect(weather_coords[:current][:humidity]).to be_a Numeric
-    expect(weather_coords[:current]).to have_key(:uvi)
-    expect(weather_coords[:current][:uvi]).to be_a Numeric
-    expect(weather_coords[:current]).to have_key(:visibility)
-    expect(weather_coords[:current][:visibility]).to be_a Numeric
+
+    current_weather = weather_coords[:current]
+    expect(current_weather).to be_a Hash
+    expect(current_weather).to have_key(:dt)
+    expect(current_weather[:dt]).to be_an Integer
+    expect(current_weather).to have_key(:sunrise)
+    expect(current_weather[:sunrise]).to be_an Integer
+    expect(current_weather).to have_key(:sunset)
+    expect(current_weather[:sunset]).to be_an Integer
+    expect(current_weather).to have_key(:temp)
+    expect(current_weather[:temp]).to be_a Numeric
+    expect(current_weather).to have_key(:feels_like)
+    expect(current_weather[:feels_like]).to be_a Numeric
+    expect(current_weather).to have_key(:humidity)
+    expect(current_weather[:humidity]).to be_a Numeric
+    expect(current_weather).to have_key(:uvi)
+    expect(current_weather[:uvi]).to be_a Numeric
+    expect(current_weather).to have_key(:visibility)
+    expect(current_weather[:visibility]).to be_a Numeric
 
 
-    expect(weather_coords[:current]).to have_key(:weather)
-    expect(weather_coords[:current][:weather]).to be_an Array
-    expect(weather_coords[:current][:weather].first).to be_a Hash
-    expect(weather_coords[:current][:weather].first).to have_key(:description)
-    expect(weather_coords[:current][:weather].first[:description]).to be_a String
-    expect(weather_coords[:current][:weather].first).to have_key(:icon)
-    expect(weather_coords[:current][:weather].first[:icon]).to be_a String
+    expect(current_weather).to have_key(:weather)
+    expect(current_weather[:weather]).to be_an Array
+    expect(current_weather[:weather].first).to be_a Hash
+    expect(current_weather[:weather].first).to have_key(:description)
+    expect(current_weather[:weather].first[:description]).to be_a String
+    expect(current_weather[:weather].first).to have_key(:icon)
+    expect(current_weather[:weather].first[:icon]).to be_a String
 
+
+    expect(weather_coords).to have_key(:daily)
+    expect(weather_coords[:daily]).to be_an Array
+    expect(weather_coords[:daily].size).to eq(8)
 
     day = weather_coords[:daily].first
- #    => [:dt,
-   # :sunrise,
-   # :sunset,
-   # :moonrise,
-   # :moonset,
-   # :moon_phase,
-   # :temp,
-   # :feels_like,
-   # :pressure,
-   # :humidity,
-   # :dew_point,
-   # :wind_speed,
-   # :wind_deg,
-   # :wind_gust,
-   # :weather,
-   # :clouds,
-   # :pop,
-   # :uvi]
-
     expect(day).to have_key(:dt)
     expect(day[:dt]).to be_an Integer
     expect(day).to have_key(:sunrise)
@@ -92,9 +59,8 @@ RSpec.describe WeatherService, :vcr do
     expect(day).to have_key(:sunset)
     expect(day[:sunset]).to be_an Integer
     expect(day).to have_key(:temp)
-    expect(day[:temp]).to be_a Hash
-    # => {:day=>86.34, :min=>61.84, :max=>89.94, :night=>75.51, :eve=>89.6, :morn=>61.84}
 
+    expect(day[:temp]).to be_a Hash
     expect(day[:temp]).to have_key(:min)
     expect(day[:temp][:min]).to be_a Numeric
     expect(day[:temp]).to have_key(:max)
@@ -104,33 +70,17 @@ RSpec.describe WeatherService, :vcr do
     expect(day[:weather]).to be_an Array
     expect(day[:weather].first).to be_a Hash
     expect(day[:weather].first).to have_key(:description)
-    # => [{:id=>800, :main=>"Clear", :description=>"clear sky", :icon=>"01d"}]
 
     expect(day[:weather].first[:description]).to be_a String
     expect(day[:weather].first).to have_key(:icon)
     expect(day[:weather].first[:icon]).to be_a String
 
 
-
-    hour = weather_coords[:hourly].first
-
     expect(weather_coords).to have_key(:hourly)
     expect(weather_coords[:hourly]).to be_an Array
     expect(weather_coords[:hourly].size).to eq(48)
-    # => [:dt,
-    #  :temp,
-    #  :feels_like,
-    #  :pressure,
-    #  :humidity,
-    #  :dew_point,
-    #  :uvi,
-    #  :clouds,
-    #  :visibility,
-    #  :wind_speed,
-    #  :wind_deg,
-    #  :wind_gust,
-    #  :weather,
-    #  :pop]
+
+    hour = weather_coords[:hourly].first
     expect(hour).to be_a Hash
     expect(hour).to have_key(:dt)
     expect(hour[:dt]).to be_an Integer
@@ -147,9 +97,5 @@ RSpec.describe WeatherService, :vcr do
     expect(hour[:weather].first[:description]).to be_a String
     expect(hour[:weather].first).to have_key(:icon)
     expect(hour[:weather].first[:icon]).to be_a String
-    expect(weather_coords).to have_key(:daily)
-    expect(weather_coords[:daily]).to be_an Array
-    expect(weather_coords[:daily].size).to eq(8)
-
   end
 end
