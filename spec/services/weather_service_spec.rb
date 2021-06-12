@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe WeatherService, :vcr do
-  it 'Retrieve weather for a city via coordinates' do
-    #Denver coordinate39.7392° N, 104.9903° W
+RSpec.describe WeatherService do
+  it 'Retrieve weather for a city via coordinates', :vcr do
+
     coordinates = {
       lat: 39.738453,
       lng: -104.984853
