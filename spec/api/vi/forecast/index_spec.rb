@@ -14,7 +14,6 @@ RSpec.describe 'Forecast API - Endpoints', type: :request do
     expect(forecast).to have_key(:type)
     expect(forecast[:type]).to eq('forecast')
     expect(forecast).to have_key(:attributes)
-    expect(forecast[:attributes]).to be_a(Hash)
 
     attributes = forecast[:attributes]
 
