@@ -7,7 +7,7 @@ RSpec.describe WeatherService do
       lat: 39.738453,
       lng: -104.984853
     }
-    weather_coords = WeatherService.weather(coordinates)
+    weather_coords = WeatherService.get_weather(coordinates)
 
     expect(weather_coords).to be_a Hash
     expect(weather_coords).to have_key(:lat)
