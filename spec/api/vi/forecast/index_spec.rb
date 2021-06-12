@@ -16,7 +16,6 @@ RSpec.describe 'Forecast API - Endpoints', type: :request do
     expect(forecast).to have_key(:attributes)
     expect(forecast[:attributes]).to be_a(Hash)
 
-
     attributes = forecast[:attributes]
 
     expect(attributes).to have_key(:current_weather)
@@ -25,7 +24,6 @@ RSpec.describe 'Forecast API - Endpoints', type: :request do
     expect(attributes[:daily_weather]).to be_an(Array)
     expect(attributes).to have_key(:hourly_weather)
     expect(attributes[:hourly_weather]).to be_an(Array)
-
 
     current_weather = attributes[:current_weather]
 
@@ -71,13 +69,11 @@ RSpec.describe 'Forecast API - Endpoints', type: :request do
     expect(day).to have_key :icon
     expect(day[:icon]).to be_a String
 
-
-
     hourly_weather = attributes[:hourly_weather]
     expect(hourly_weather.count).to eq(8)
 
     hour = hourly_weather.first
-    expect(hour).to be_a(Hash)\
+    expect(hour).to be_a(Hash)
     expect(hour).to have_key :time
     expect(hour[:time]).to be_a String
     expect(hour).to have_key :temperature
