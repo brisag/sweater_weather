@@ -5,7 +5,8 @@ class BackgroundService
         req.params['client_id'] = ENV['SPLASH_API_KEY']
         req.params['query'] = location
       end
-      JSON.parse(response.body, symbolize_names: true)
+      # binding.pry
+      parse_data(response)
     end
 
     def conn
