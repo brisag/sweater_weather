@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :forecast, only: :index
       resources :backgrounds, only: :index
-      resources :books, only: :index
+      resources :book, only: :index, path: '/book-search'
     end
   end
 end
