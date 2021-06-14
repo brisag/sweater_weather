@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Openlibrary Search'do
   describe 'search by destination' do
-    it 'can return books and current weather of a destination' do
+    it 'can return books and current weather of a destination', :vcr do
       location = 'denver,co'
-      get "/api/v1/book-search?location=denver,co&quantity=5"
-      binding.pry
+      quantity = "5"
+
+      get "/api/v1/book-search?location=#{location}&quantity=#{quantity}"
+      # binding.pry
 
       expect(response).to be_successful
 

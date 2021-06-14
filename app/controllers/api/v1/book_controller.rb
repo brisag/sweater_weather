@@ -3,7 +3,8 @@ class Api::V1::BookController < ApplicationController
 
   def index
     # binding.pry
-    books = BooksFacade.book(params[:destination])
+    # if params[:quantity] < 0
+    books = BooksFacade.book(params[:destination], params[:quantity])
     render json: BookSerializer.new(books)
   end
 

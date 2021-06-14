@@ -4,7 +4,7 @@ class Book
               :forecast,
               :books
 
-  def initialize(books, forecast, destination)
+  def initialize(books, forecast)
     @id = nil
     @destination = destination
     @forecast = get_forecast(forecast)
