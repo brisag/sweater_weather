@@ -1,7 +1,9 @@
-class Api::V1::BookSearchController < ApplicationController
+class Api::V1::BookController < ApplicationController
   before_action :validate_params
+
   def index
-    books = BooksFacade.get_books(params[:destination])
+    # binding.pry
+    books = BooksFacade.book(params[:destination])
     render json: BookSerializer.new(books)
   end
 

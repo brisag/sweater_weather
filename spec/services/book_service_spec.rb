@@ -18,6 +18,7 @@ RSpec.describe BooksService do
     expect(response[:docs]).to be_a Array
 
     docs = response[:docs].first
+
     expect(docs).to be_a Hash
     expect(docs).to have_key(:key)
     expect(docs[:key]).to be_a String
@@ -31,21 +32,5 @@ RSpec.describe BooksService do
     expect(docs[:title_suggest]).to be_a String
     expect(docs).to have_key(:isbn)
     expect(docs[:isbn]).to be_a Array
-
-
-    travel = response[:docs].first[:title]
-    expect(travel).to be_a Hash
-    expect(travel).to have_key(:key)
-    expect(travel[:key]).to be_a String
-    expect(travel).to have_key(:text)
-    expect(travel[:text]).to be_a Array
-    expect(travel).to have_key(:seed)
-    expect(travel[:seed]).to be_a Array
-    expect(travel).to have_key(:title)
-    expect(travel[:title]).to be_a String
-    expect(travel).to have_key(:title_suggest)
-    expect(travel[:title_suggest]).to be_a String
-    expect(travel).to have_key(:isbn)
-    expect(travel[:isbn]).to be_a Array
   end
-end 
+end
