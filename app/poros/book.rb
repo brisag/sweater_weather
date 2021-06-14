@@ -13,8 +13,8 @@ class Book
 
   def get_forecast(forecast)
     {
-      summary: @weather.current_weather.conditions,
-      temperature: @weather.current_weather.temperature
+      summary: forecast[:current][:weather].first[:description],
+      temperature: "#{forecast[:current][:temp]} F"
     }
 
   end
@@ -24,7 +24,7 @@ class Book
             "Insight Fleximap Denver, CO (Insight Fleximaps","Five Points Neighborhood of Denver  (CO)"]
 
     book_titles.map do |book_title|
-      book = book[:docs].find { |book| book[:docs][:title] == book_title}
+      book = book[:docs].find { }
       get_book_info(book) if book
     end
   end
