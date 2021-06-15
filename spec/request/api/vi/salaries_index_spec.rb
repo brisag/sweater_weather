@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Salaries Search -index', type: :request do
   describe 'Successful Search' do
     it 'can return certain salaries an current weather of a location', :vcr do
+
       location = 'denver'
       get "/api/v1/salaries?destination=#{location}"
 
