@@ -56,14 +56,5 @@ RSpec.describe 'Salaries Search -index', type: :request do
       data = JSON.parse(response.body, symbolize_names: true)
       expect(data[:error]).to eq('Must provide destination')
     end
-
-    it 'returns error when no location param' do
-      get '/api/v1/salaries'
-
-      expect(response).not_to be_successful
-      expect(response.status).to eq(400)
-      data = JSON.parse(response.body, symbolize_names: true)
-      expect(data[:error]).to eq('Must provide destination')
-    end
   end
 end

@@ -14,18 +14,14 @@ RSpec.describe "Teleport Search" do
 
     salary = response[:salaries].first
 
-    # keys  [:job, :salary_percentiles]
-
     expect(salary).to be_a Hash
     expect(salary).to have_key(:job)
     expect(salary[:job]).to be_a Hash
-    # keys #=> [:id, :title]
     expect(salary[:job]).to have_key(:id)
     expect(salary[:job][:id]).to be_a String
     expect(salary[:job]).to have_key(:title)
     expect(salary[:job][:title]).to be_a String
     expect(salary).to have_key(:salary_percentiles)
-    # keys => [:percentile_25, :percentile_50, :percentile_75]
     expect(salary[:salary_percentiles]).to be_a Hash
     expect(salary[:salary_percentiles]).to have_key(:percentile_25)
     expect(salary[:salary_percentiles][:percentile_25]).to be_a Float
@@ -34,39 +30,4 @@ RSpec.describe "Teleport Search" do
     expect(salary[:salary_percentiles]).to have_key(:percentile_75)
     expect(salary[:salary_percentiles][:percentile_75]).to be_a Float
   end
-
-  # describe "sad path" do
-  #   it "returns an empty hash if location is empty", :vcr do
-  #     location = ""
-  #     response = TeleportService.find_salaries(location)
-  #     expect(response.status).to eq(404)
-  #     expect(response.response_body).to eq("Sorry, but the page you were trying to view does not exist.")
-  #   end
-  # end
 end
-
-    # it "returns an error if no record", :vcr do
-    #   location = "Marmath"
-    #   response = TeleportService.find_salaries(location)
-    #   expect(response.status).to eq(404)
-    #   expect(response.response_body).to eq("Not Found. You have requested this URI")
-    # end
-  # end
-# end
-
-# New API is successfully working from user request to API and back again per instructions
-# JSON Response to end user matches requirements
-# Code has been refactored to include a Facade
-# Code has been refactored to include a Service for the new API
-# Code has been refactored to include a PORO or OpenStruct for new data
-# Happy path testing is complete for new endpoint request(s)
-# Happy/sad path testing is complete for new Facade
-# Happy/sad path testing is complete for new Service
-# Happy/sad path testing is complete for new PORO
-
-#
-#
-# You will be using Teleport’s API to find tech salary information in a destination city provided by the user. Presume that your user will always provide a known “good” location. (you can handle edge cases and sad paths after you implement the core functionality)
-# Your endpoint should follow this format:
-# GET /api/v1/salaries?destination=chicago
-# please do not deviate from the names of the endpoint or query parameter, be sure it is called “salaries” and “destination”, respectively
