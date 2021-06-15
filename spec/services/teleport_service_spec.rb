@@ -35,10 +35,21 @@ RSpec.describe "Teleport Search" do
     expect(salary[:salary_percentiles][:percentile_75]).to be_a Float
   end
 
-  describe "sad path" do
-    xit "returns an empty hash if location is empty" do
-    end
-  end
+  # describe "sad path" do
+  #   it "returns an empty hash if location is empty", :vcr do
+  #     location = ""
+  #     response = TeleportService.find_salaries(location)
+  #     expect(response.status).to eq(404)
+  #     expect(response.response_body).to eq("Sorry, but the page you were trying to view does not exist.")
+  #   end
+
+    # it "returns an error if no record", :vcr do
+    #   location = "Marmath"
+    #   response = TeleportService.find_salaries(location)
+    #   expect(response.status).to eq(404)
+    #   expect(response.response_body).to eq("Not Found. You have requested this URI")
+    # end
+  # end
 end
 
 #
