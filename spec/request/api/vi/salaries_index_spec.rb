@@ -29,7 +29,7 @@ RSpec.describe 'Salaries Search -index', type: :request do
       expect(forecast).to have_key(:summary)
       expect(forecast[:summary]).to be_a String
       expect(forecast).to have_key(:temperature)
-      # expect(forecast[:temperature]).to be_a String
+      expect(forecast[:temperature]).to be_a String
 
       expect(data).to have_key(:salaries)
       expect(data[:salaries]).to be_an Array
@@ -38,12 +38,25 @@ RSpec.describe 'Salaries Search -index', type: :request do
       expect(salary1).to have_key(:title)
       expect(salary1[:title]).to be_a String
       expect(salary1).to have_key(:min)
-      # expect(salary1[:min]).to be_a String
-      # expect(salary1).to have_key(:max)
-      # expect(salary1[:max]).to be_a String
+      expect(salary1[:min]).to be_a String
+      expect(salary1).to have_key(:max)
+      expect(salary1[:max]).to be_a String
     end
   end
-  # describe "sad path" do
-  #
-  # end
+
+  describe "sad path" do
+    it "returns an empty hash if location is empty", :vcr do
+      location = ""
+      response = TeleportService.find_salaries(location)
+      expect(response.status).to eq(404)
+      expect(response.response_body).to eq("Sorry, but the page you were trying to view does not exist.")
+    end
+
+    it "returns an error if no record", :vcr do
+      location = "Marmath"
+      response = TeleportService.find_salaries(location)
+      expect(response.status).to eq(404)
+      expect(response.response_body).to eq("Not Found. You have requested this URI")
+    end
+  end
 end
