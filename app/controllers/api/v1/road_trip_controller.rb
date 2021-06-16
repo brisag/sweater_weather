@@ -1,17 +1,23 @@
-class Api::V1::RoadTripController < ApplicationController
-  def create
-    if User.find_by(api_key: trip_params[:api_key])
-      road_trip = RoadTripFacade.trip(trip_params)
-      render json: TripSerializer.new(road_trip)
-    else
-      render json: { error: 'invalid api_key' }, status: :unauthorized
+# frozen_string_literal: true
+
+module Api
+  module V1
+    class RoadTripController < ApplicationController
+      def create
+        if User.find_by(api_key: trip_params[:api_key])
+          road_trip = RoadTripFacade.trip(trip_params)
+          render json: TripSerializer.new(road_trip)
+        else
+          render json: { error: 'invalid api_key' }, status: :unauthorized
+        end
+      end
+
+      private
+
+      def trip_params
+        params.permit(:origin, :destination, :api_key)
+      end
     end
-  end
-
-  private
-
-  def trip_params
-    params.permit(:origin, :destination, :api_key)
   end
 end
 

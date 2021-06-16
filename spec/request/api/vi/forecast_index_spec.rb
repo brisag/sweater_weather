@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Forecast API - Endpoints', type: :request do
-  it "Retrieve weather for a city", :vcr do
-
+  it 'Retrieve weather for a city', :vcr do
     get '/api/v1/forecast?location=denver,co'
 
     expect(response).to be_successful
@@ -47,7 +48,6 @@ RSpec.describe 'Forecast API - Endpoints', type: :request do
     expect(current_weather).to have_key :icon
     expect(current_weather[:icon]).to be_a String
 
-
     daily_weather = attributes[:daily_weather]
     expect(daily_weather.count).to eq(5)
 
@@ -83,36 +83,36 @@ RSpec.describe 'Forecast API - Endpoints', type: :request do
     expect(hour[:icon]).to be_a String
   end
 
-  describe "sad path" do
+  describe 'sad path' do
     it "Won't return weather with empty location" do
-      params = ({
-                   location: ""
-                  })
+      params = {
+        location: ''
+      }
 
-      headers = {"CONTENT_TYPE" => "application/json"}
-      get "/api/v1/forecast", headers: headers, params: params
+      headers = { 'CONTENT_TYPE' => 'application/json' }
+      get '/api/v1/forecast', headers: headers, params: params
 
-      error = JSON.parse(response.body, symbolize_names:true)
-      error_message = "Must provide location"
+      error = JSON.parse(response.body, symbolize_names: true)
+      error_message = 'Must provide location'
 
       expect(response).to have_http_status(:bad_request)
       expect(error).to have_key(:error)
-      expect(error[:error]).to eq("#{error_message}")
+      expect(error[:error]).to eq(error_message.to_s)
     end
 
     it "Won't return background with blank location" do
-      params = ({
-                  })
+      params = {
+      }
 
-      headers = {"CONTENT_TYPE" => "application/json"}
-      get "/api/v1/forecast", headers: headers, params: params
+      headers = { 'CONTENT_TYPE' => 'application/json' }
+      get '/api/v1/forecast', headers: headers, params: params
 
-      error = JSON.parse(response.body, symbolize_names:true)
-      error_message = "Must provide location"
+      error = JSON.parse(response.body, symbolize_names: true)
+      error_message = 'Must provide location'
 
       expect(response).to have_http_status(:bad_request)
       expect(error).to have_key(:error)
-      expect(error[:error]).to eq("#{error_message}")
+      expect(error[:error]).to eq(error_message.to_s)
     end
   end
 end

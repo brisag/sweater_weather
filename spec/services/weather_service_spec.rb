@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe WeatherService do
   it 'Retrieve weather for a city via coordinates', :vcr do
-
     coordinates = {
       lat: 39.738453,
       lng: -104.984853
@@ -37,7 +38,6 @@ RSpec.describe WeatherService do
     expect(current_weather).to have_key(:visibility)
     expect(current_weather[:visibility]).to be_a Numeric
 
-
     expect(current_weather).to have_key(:weather)
     expect(current_weather[:weather]).to be_an Array
     expect(current_weather[:weather].first).to be_a Hash
@@ -45,7 +45,6 @@ RSpec.describe WeatherService do
     expect(current_weather[:weather].first[:description]).to be_a String
     expect(current_weather[:weather].first).to have_key(:icon)
     expect(current_weather[:weather].first[:icon]).to be_a String
-
 
     expect(weather_coords).to have_key(:daily)
     expect(weather_coords[:daily]).to be_an Array
@@ -74,7 +73,6 @@ RSpec.describe WeatherService do
     expect(day[:weather].first[:description]).to be_a String
     expect(day[:weather].first).to have_key(:icon)
     expect(day[:weather].first[:icon]).to be_a String
-
 
     expect(weather_coords).to have_key(:hourly)
     expect(weather_coords[:hourly]).to be_an Array

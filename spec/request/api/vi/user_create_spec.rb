@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'User Registration Endpoint', type: :request do
   it 'can register a user', :vcr do
     body = {
-      "email": "whatever@example.com",
-      "password": "password",
-      "password_confirmation": "password"
+      "email": 'whatever@example.com',
+      "password": 'password',
+      "password_confirmation": 'password'
     }
 
     headers = {
@@ -36,9 +38,9 @@ RSpec.describe 'User Registration Endpoint', type: :request do
 
   it 'returns an error with duplicate users' do
     body = {
-      "email": "whatever@example.com",
-      "password": "password",
-      "password_confirmation": "password"
+      "email": 'whatever@example.com',
+      "password": 'password',
+      "password_confirmation": 'password'
     }
 
     headers = {
@@ -54,14 +56,14 @@ RSpec.describe 'User Registration Endpoint', type: :request do
 
     user = JSON.parse(response.body, symbolize_names: true)
 
-    expect(user[:email]).to eq(["has already been taken"])
+    expect(user[:email]).to eq(['has already been taken'])
   end
 
   it 'retunrs error when passwords dont match' do
     body = {
-      "email": "whatever@example.com",
-      "password": "password",
-      "password_confirmation": "pasword"
+      "email": 'whatever@example.com',
+      "password": 'password',
+      "password_confirmation": 'pasword'
     }
 
     headers = {
@@ -81,8 +83,8 @@ RSpec.describe 'User Registration Endpoint', type: :request do
 
   it 'can return an error with missing field' do
     body = {
-      "password": "password",
-      "password_confirmation": "password"
+      "password": 'password',
+      "password_confirmation": 'password'
     }
 
     headers = {
@@ -97,6 +99,6 @@ RSpec.describe 'User Registration Endpoint', type: :request do
 
     user = JSON.parse(response.body, symbolize_names: true)
 
-    expect(user[:email]).to eq(["can't be blank", "is invalid"])
+    expect(user[:email]).to eq(["can't be blank", 'is invalid'])
   end
 end

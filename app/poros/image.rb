@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Image
   attr_reader :id,
               :location,
@@ -5,7 +7,7 @@ class Image
               :description,
               :credit
 
-  def initialize(data,location)
+  def initialize(data, location)
     @id = nil
     @location = location
     @image_url = data[:urls][:regular]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BackgroundService
   class << self
     def get_image(location)

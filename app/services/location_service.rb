@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocationService
   class << self
     def get_coordinates(location)

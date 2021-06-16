@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Road Trip Endpoint', type: :request do
@@ -7,14 +9,14 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
 
   it 'can return road trip information', :vcr do
     params = {
-      "origin": "Denver,CO",
-      "destination": "Pueblo,CO",
+      "origin": 'Denver,CO',
+      "destination": 'Pueblo,CO',
       "api_key": @user.api_key
     }
 
-    headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
+    headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
 
-    post "/api/v1/road_trip", headers: headers, params: params, as: :json
+    post '/api/v1/road_trip', headers: headers, params: params, as: :json
 
     expect(response).to be_successful
 
@@ -25,7 +27,7 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
     expect(trip[:data]).to be_a Hash
 
     expect(trip[:data]).to have_key(:type)
-    expect(trip[:data][:type]).to eq("trip")
+    expect(trip[:data][:type]).to eq('trip')
 
     expect(trip[:data]).to have_key(:id)
     expect(trip[:data][:id]).to eq(nil)
@@ -52,20 +54,20 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
   end
   it 'can return partial road trip information for impossible trips', :vcr do
     user_body = {
-                    "email": "whatever@example.com",
-                    "password": "password"
-                  }
+      "email": 'whatever@example.com',
+      "password": 'password'
+    }
 
     body = {
-              "origin": "New York, NY",
-              "destination": "London, UK",
-              "api_key": @user.api_key
-            }
+      "origin": 'New York, NY',
+      "destination": 'London, UK',
+      "api_key": @user.api_key
+    }
 
     headers = {
-                  'Content-Type' => 'application/json',
-                  'Accept' => 'application/json'
-                }
+      'Content-Type' => 'application/json',
+      'Accept' => 'application/json'
+    }
 
     post '/api/v1/road_trip', headers: headers, params: body.to_json
     expect(response).to be_successful
@@ -100,21 +102,20 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
 
   it 'can return unauthorized user if invalid key' do
     user_body = {
-                      "email": "whatever@example.com",
-                      "password": "password"
-                    }
-
+      "email": 'whatever@example.com',
+      "password": 'password'
+    }
 
     body = {
-                "origin": "Denver,CO",
-                "destination": "Pueblo,CO",
-                "api_key": "wrong api key"
-              }
+      "origin": 'Denver,CO',
+      "destination": 'Pueblo,CO',
+      "api_key": 'wrong api key'
+    }
 
     headers = {
-                    'Content-Type' => 'application/json',
-                    'Accept' => 'application/json'
-                  }
+      'Content-Type' => 'application/json',
+      'Accept' => 'application/json'
+    }
 
     post '/api/v1/road_trip', headers: headers, params: body.to_json
 
@@ -123,6 +124,6 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
 
     trip = JSON.parse(response.body, symbolize_names: true)
 
-    expect(trip[:error]).to eq("invalid api_key")
+    expect(trip[:error]).to eq('invalid api_key')
   end
 end

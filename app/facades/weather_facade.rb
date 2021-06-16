@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WeatherFacade
   class << self
     def get_forecast(location)
@@ -10,7 +12,7 @@ class WeatherFacade
         end,
 
         hourly_weather: weather[:hourly].first(8).map do |hour|
-            HourlyWeather.new(hour)
+          HourlyWeather.new(hour)
         end
       }
       Forecast.new(forecast)

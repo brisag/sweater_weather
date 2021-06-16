@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Trip, :vcr do
@@ -8,11 +10,11 @@ RSpec.describe Trip, :vcr do
     directions = LocationService.get_duration(origin, origin)
 
     trip_data = {
-                    start_city: origin,
-                    end_city: destination,
-                    total_time: directions[:route][:time],
-                    weather: WeatherFacade.get_forecast(destination)
-                  }
+      start_city: origin,
+      end_city: destination,
+      total_time: directions[:route][:time],
+      weather: WeatherFacade.get_forecast(destination)
+    }
 
     trip = Trip.new(trip_data)
 
@@ -29,11 +31,11 @@ RSpec.describe Trip, :vcr do
     directions = LocationService.get_duration(origin, destination)
 
     trip_data = {
-                    start_city: origin,
-                    end_city: destination,
-                    total_time: directions[:route][:time],
-                    weather: WeatherFacade.get_forecast(destination)
-                  }
+      start_city: origin,
+      end_city: destination,
+      total_time: directions[:route][:time],
+      weather: WeatherFacade.get_forecast(destination)
+    }
 
     trip = Trip.new(trip_data)
 
@@ -51,11 +53,11 @@ RSpec.describe Trip, :vcr do
     directions = LocationService.get_duration(origin, destination)
 
     trip_data = {
-                    start_city: origin,
-                    end_city: destination,
-                    total_time: directions[:route][:time],
-                    weather: WeatherFacade.get_forecast(destination)
-                  }
+      start_city: origin,
+      end_city: destination,
+      total_time: directions[:route][:time],
+      weather: WeatherFacade.get_forecast(destination)
+    }
 
     trip = Trip.new(trip_data)
 

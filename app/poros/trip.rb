@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Trip
   attr_reader :start_city,
               :end_city
@@ -11,6 +13,7 @@ class Trip
 
   def travel_time
     return 'impossible' if @total_time.nil? || @total_time.zero? || @total_time == 1_000_000
+
     # binding.pry
     day = Time.at(@total_time).utc.day
     if day == 1

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe BackgroundService do
   it 'get image of location query', :vcr do
-
     location = 'buena vista'
     response = BackgroundService.get_image(location)
 

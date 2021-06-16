@@ -1,16 +1,20 @@
-class Api::V1::ForecastController < ApplicationController
-  before_action :validate_params
+# frozen_string_literal: true
 
-  def index
-    forecast = WeatherFacade.get_forecast(params[:location])
-    render json: ForecastSerializer.new(forecast)
-  end
+module Api
+  module V1
+    class ForecastController < ApplicationController
+      before_action :validate_params
 
-  private
+      def index
+        forecast = WeatherFacade.get_forecast(params[:location])
+        render json: ForecastSerializer.new(forecast)
+      end
 
-  def validate_params
-    if params[:location].blank?
-      render json: { error: "Must provide location" }, status: :bad_request
+      private
+
+      def validate_params
+        render json: { error: 'Must provide location' }, status: :bad_request if params[:location].blank?
+      end
     end
   end
 end

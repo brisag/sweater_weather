@@ -1,9 +1,9 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
+require 'rails_helper'
 
 RSpec.describe LocationService do
   it 'can get coordinates for a location', :vcr do
-
     location = 'denver,co'
     response = LocationService.get_coordinates(location)
 

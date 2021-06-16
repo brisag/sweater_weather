@@ -1,16 +1,20 @@
-class Api::V1::BackgroundsController < ApplicationController
-  before_action :validate_params
+# frozen_string_literal: true
 
-  def index
-    image = BackgroundFacade.image(params[:location])
-    render json: ImageSerializer.new(image)
-  end
+module Api
+  module V1
+    class BackgroundsController < ApplicationController
+      before_action :validate_params
 
-  private
+      def index
+        image = BackgroundFacade.image(params[:location])
+        render json: ImageSerializer.new(image)
+      end
 
-  def validate_params
-    if params[:location].blank?
-      render json: { error: "Must provide location" }, status: :bad_request
+      private
+
+      def validate_params
+        render json: { error: 'Must provide location' }, status: :bad_request if params[:location].blank?
+      end
     end
   end
 end

@@ -1,5 +1,11 @@
-class Api::V1::ForecastController < ApplicationController
-  def index
-    render json: {}
+# frozen_string_literal: true
+
+module Api
+  module V1
+    class ForecastController < ApplicationController
+      def index
+        render json: {}
+      end
+    end
   end
 end
