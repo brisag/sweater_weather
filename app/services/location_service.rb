@@ -8,7 +8,7 @@ class LocationService
       JSON.parse(response.body, symbolize_names: true)
     end
 
-    def find_directions(start, destination)
+    def get_duration(start, destination)
       response = conn.get('directions/v2/route') do |req|
         req.params['key'] = ENV['MAPQ_API_KEY']
         req.params['from'] = start
