@@ -11,51 +11,43 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
     }
 
     headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
-    binding.pry
+    # binding.pry
 
     post "/api/v1/road_trip", headers: headers, params: params, as: :json
 
     expect(response).to be_successful
+    binding.pry
+    expect(response.status).to eq(200)
+    trip = JSON.parse(response.body, symbolize_names: true)
+    expect(trip).to have_key(:data)
+    expect(trip[:data]).to be_a Hash
 
-    trip = JSON.parse(response.body, symbolize_names: true)[:data]
+    expect(trip[:data]).to have_key(:type)
+    expect(trip[:data][:type]).to eq("trip")
 
-  #   {
-  # "data": {
-  #   "id": null,
-  #   "type": "roadtrip",
-  #   "attributes": {
-  #     "start_city": "Denver, CO",
-  #     "end_city": "Estes Park, CO",
-  #     "travel_time": "2 hours, 13 minutes"
-  #     "weather_at_eta": {
-  #       "temperature": 59.4,
-  #       "conditions": "partly cloudy with a chance of meatballs"
-  #     }
-  #   }
-  # }
-
-    expect(trip).to have_key(:id)
-    expect(trip[:id]).to be_nil
-    expect(trip).to have_key(:type)
-    expect(trip[:type]).to eq('road_trip')
-    expect(trip).to have_key(:attributes)
-    expect(trip[:attributes]).to be_a(Hash)
-
-    attributes = trip[:attributes]
-
+    expect(trip[:data]).to have_key(:id)
+    expect(trip[:data][:id]).to eq(nil)
+    expect(trip[:data]).to have_key(:attributes)
+    expect(trip[:data][:attributes]).to be_a Hash
+    attributes = trip[:data][:attributes]
+    expect(attributes.keys.count).to eq(4)
     expect(attributes).to have_key(:start_city)
-    expect(attributes[:start_city]).to be_a(String)
+    expect(attributes[:start_city]).to be_a String
     expect(attributes).to have_key(:end_city)
-    expect(attributes[:end_city]).to be_a(String)
+    expect(attributes[:end_city]).to be_a String
     expect(attributes).to have_key(:travel_time)
-    expect(attributes[:travel_time]).to be_a(String)
+    expect(attributes[:travel_time]).to be_a String
     expect(attributes).to have_key(:weather_at_eta)
-    expect(attributes[:weather_at_eta]).to be_a(Hash)
-
-    weather = attributes[:weather_at_eta]
-    expect(weather).to have_key(:temperature)
-    expect(weather[:temperature]).to be_a(Numeric)
-    expect(weather).to have_key(:conditions)
-    expect(weather[:conditions]).to be_a(String)
+    expect(attributes[:weather_at_eta]).to be_a Hash
+    expect(attributes).to have_key(:start_city)
+    expect(attributes[:start_city]).to be_a String
+    expect(attributes).to have_key(:end_city)
+    expect(attributes[:end_city]).to be_a String
+    expect(attributes).to have_key(:start_city)
+    expect(attributes[:start_city]).to be_a String
+    expect(attributes[:weather_at_eta]).to have_key(:temperature)
+    expect(attributes[:weather_at_eta][:temperature]).to be_a Numeric
+    expect(attributes[:weather_at_eta]).to have_key(:conditions)
+    expect(attributes[:weather_at_eta][:conditions]).to be_a String
   end
 end
