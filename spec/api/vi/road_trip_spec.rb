@@ -17,6 +17,7 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
     expect(response).to be_successful
 
     expect(response.status).to eq(200)
+
     trip = JSON.parse(response.body, symbolize_names: true)
     expect(trip).to have_key(:data)
     expect(trip[:data]).to be_a Hash
@@ -29,6 +30,7 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
     expect(trip[:data]).to have_key(:attributes)
     expect(trip[:data][:attributes]).to be_a Hash
     attributes = trip[:data][:attributes]
+    # => [:start_city, :end_city, :travel_time, :weather_at_eta]
     expect(attributes.keys.count).to eq(4)
     expect(attributes).to have_key(:start_city)
     expect(attributes[:start_city]).to be_a String
@@ -44,9 +46,6 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
     expect(attributes[:end_city]).to be_a String
     expect(attributes).to have_key(:start_city)
     expect(attributes[:start_city]).to be_a String
-    expect(attributes[:weather_at_eta]).to have_key(:temperature)
-    expect(attributes[:weather_at_eta][:temperature]).to be_a Numeric
-    expect(attributes[:weather_at_eta]).to have_key(:conditions)
     expect(attributes[:weather_at_eta][:conditions]).to be_a String
   end
 end
