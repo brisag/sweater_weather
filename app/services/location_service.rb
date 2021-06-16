@@ -8,6 +8,15 @@ class LocationService
       JSON.parse(response.body, symbolize_names: true)
     end
 
+    def get_directions(start, destination)
+      response = conn.get('directions/v2/route') do |req|
+        req.params['from'] = start
+        req.params['to'] = destination
+      end
+      # binding.pry
+      parse_data(response)
+    end
+
     def conn
       Faraday.new('http://www.mapquestapi.com')
     end
@@ -21,3 +30,4 @@ end
 
 
 # http://www.mapquestapi.com/geocoding/v1/address?key=KEY&location=Washington,DC
+# https://developer.mapquest.com/documentation/directions-api/
