@@ -2,7 +2,7 @@ class BackgroundService
   class << self
     def get_image(location)
       response = conn.get('/search/photos') do |req|
-        req.params['client_id'] = ENV['SPLASH_API_KEY']
+        req.params['client_id'] = ENV['UNSPLASH_API_KEY']
         req.params['query'] = location
       end
       parse_data(response)

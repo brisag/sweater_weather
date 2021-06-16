@@ -5,6 +5,7 @@ class WeatherFacade
 
       forecast = {
         current_weather: CurrentWeather.new(weather[:current]),
+        
         daily_weather: weather[:daily].first(5).map do |day|
           DailyWeather.new(day)
         end,

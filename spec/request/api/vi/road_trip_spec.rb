@@ -6,7 +6,6 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
   end
 
   it 'can return road trip information', :vcr do
-    binding.pry
     params = {
       "origin": "Denver,CO",
       "destination": "Pueblo,CO",

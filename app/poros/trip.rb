@@ -3,6 +3,7 @@ class Trip
               :end_city
 
   def initialize(data)
+    # binding.pry
     @start_city = data[:start_city]
     @end_city = data[:end_city]
     @total_time = data[:total_time]
