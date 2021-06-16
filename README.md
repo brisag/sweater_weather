@@ -8,7 +8,6 @@
 ![](https://img.shields.io/badge/Ruby-2.5.3-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=fc0324)
 ![Heroku](https://pyheroku-badge.herokuapp.com/?app=pyheroku-badge)
 ![Badge](https://marcgrimme.github.io/simplecov-small-badge/badges/coverage_badge_total.svg)
-[![Maintainability](https://api.codeclimate.com/v1/badges/dc015164556e774d3078/maintainability)](https://codeclimate.com/github/nicorithner/Sweater_weather/maintainability)
 
   <p> Backend Development - Cohort 2102</p>
   <h3>Brisa Garcia - June 2021 </h3>
@@ -166,12 +165,8 @@ After running the tests simplecov gathers the coverage and neatly reports them i
 
 In the command line you should see something like this:<br/>
 
-`Coverage report generated for RSpec to /Users/nicomacbook/turing/3module/sweater_weather/coverage. 196 / 196 LOC (100.0%) covered.`
+`Coverage report generated for RSpec to /Users/brisa/turing/three/projects/final_project/jackets/coverage. 749 / 752 LOC (99.6%) covered.`
 
-<p align="center">
-<img src="simplecov_coverage_terminal.png" ><br/>
-<small>sample rspec/simplecov terminal output</small>
-</p>
 
 ### Rubocop
 
@@ -376,7 +371,7 @@ This api-application has been deployed to Heroku. You can test the endpoints in 
 
 If you have postman installed locally you can run it in the app directly
 
-`https://sweater-weather-api-nico.herokuapp.com/api/v1/<type here the desired endpoint>`
+`https://cryptic-basin-02788.herokuapp.com//api/v1/<type here the desired endpoint>`
 
 
 [back to top](#table-of-contents)
