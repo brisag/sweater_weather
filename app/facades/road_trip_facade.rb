@@ -1,9 +1,17 @@
 class RoadTripFacade
-  class << self
-    def trip_details(origin, destination)
-      travel_time = LocationService.find_directions(origin, destination)
-      weather_at_eta = WeatherFacade.weather_at_eta(destination, travel_time) unless travel_time == "Impossible route"
-			Trip.new(origin, destination, travel_time, weather_at_eta)
-    end
+  def self.trip(params)
+    origin = params[:origin]
+    destination = params[:destination]
+
+    directions = LocationService.get_duration(origin, destination)
+
+    trip = {
+      start_city: origin,
+      end_city: destination,
+      total_time: directions[:route][:time],
+      weather: WeatherFacade.get_forecast(destination)
+    }
+
+    Trip.new(trip)
   end
 end

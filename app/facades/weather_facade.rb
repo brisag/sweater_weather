@@ -20,12 +20,5 @@ class WeatherFacade
       response = LocationService.get_coordinates(location)
       response[:results].first[:locations].first[:latLng]
     end
-
-    def weather_at_eta(destination, travel_time)
-      weather = WeatherFacade.get_forecast(destination)
-      # weather[:hourly].find do |hour|
-      #   hour[:dt] >= (Time.now + travel_time[:unix_time]).to_i
-      # end
-    end
   end
 end
