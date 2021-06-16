@@ -1,21 +1,18 @@
 class Api::V1::RoadTripController < ApplicationController
-  # before_action :validate_params
-
   def create
-    # binding.pry
-    user = User.find_by!(api_key: trip_params[:api_key])
-  		if user.present? && params[:origin].present? && params[:destination].present?
-        trip = RoadTripFacade.trip_details(params[:origin], params[:destination])
-        render json: TripSerializer.new(trip)
-      else
-      render json: { error: "Must provide request body" }, status: :bad_request
+    if User.find_by(api_key: trip_params[:api_key])
+      road_trip = RoadTripFacade.trip(trip_params)
+      render json: TripSerializer.new(road_trip)
+    else
+      render json: { error: 'invalid api_key' }, status: :unauthorized
     end
   end
+
   private
 
-	def trip_params
-		params.permit(:origin, :destination, :api_key)
-	end
+  def trip_params
+    params.permit(:origin, :destination, :api_key)
+  end
 end
 
 #
