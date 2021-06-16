@@ -17,7 +17,3 @@ class LocationService
     end
   end
 end
-
-
-
-# http://www.mapquestapi.com/geocoding/v1/address?key=KEY&location=Washington,DC
