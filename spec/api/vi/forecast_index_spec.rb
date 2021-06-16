@@ -90,7 +90,7 @@ RSpec.describe 'Forecast API - Endpoints', type: :request do
                   })
 
       headers = {"CONTENT_TYPE" => "application/json"}
-      get "/api/v1/backgrounds", headers: headers, params: params
+      get "/api/v1/forecast", headers: headers, params: params
 
       error = JSON.parse(response.body, symbolize_names:true)
       error_message = "Must provide location"
@@ -99,12 +99,13 @@ RSpec.describe 'Forecast API - Endpoints', type: :request do
       expect(error).to have_key(:error)
       expect(error[:error]).to eq("#{error_message}")
     end
-    it "Won't return background with empty location" do
+
+    it "Won't return background with blank location" do
       params = ({
                   })
 
       headers = {"CONTENT_TYPE" => "application/json"}
-      get "/api/v1/backgrounds", headers: headers, params: params
+      get "/api/v1/forecast", headers: headers, params: params
 
       error = JSON.parse(response.body, symbolize_names:true)
       error_message = "Must provide location"

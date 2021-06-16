@@ -5,7 +5,7 @@ class LocationService
         req.params['key'] = ENV['MAPQ_API_KEY']
         req.params['location'] = location
       end
-      JSON.parse(response.body, symbolize_names: true)
+      parse_data(response)
     end
 
     def conn

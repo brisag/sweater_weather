@@ -44,12 +44,10 @@ RSpec.describe 'Unsplash API - Endpoints', type: :request do
   end
 
   describe "sad path" do
-    it "Won't return background with empty location" do
-      params = ({
-                   destination: ""
-                  })
-
+    it "Missing location -render error message" do
+      params = ({   })
       headers = {"CONTENT_TYPE" => "application/json"}
+
       get "/api/v1/backgrounds", headers: headers, params: params
 
       error = JSON.parse(response.body, symbolize_names:true)
@@ -58,10 +56,11 @@ RSpec.describe 'Unsplash API - Endpoints', type: :request do
       expect(response).to have_http_status(:bad_request)
       expect(error).to have_key(:error)
       expect(error[:error]).to eq("#{error_message}")
-    end
-
+      end
+      
     it "Won't return background with empty location" do
       params = ({
+                   destination: ""
                   })
 
       headers = {"CONTENT_TYPE" => "application/json"}

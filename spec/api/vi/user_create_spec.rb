@@ -33,4 +33,70 @@ RSpec.describe 'User Registration Endpoint', type: :request do
     expect(attributes).to have_key(:api_key)
     expect(attributes[:api_key]).to be_a(String)
   end
+
+  it 'returns an error with duplicate users' do
+    body = {
+      "email": "whatever@example.com",
+      "password": "password",
+      "password_confirmation": "password"
+    }
+
+    headers = {
+      'Content-Type' => 'application/json',
+      'Accept' => 'application/json'
+    }
+
+    post '/api/v1/users', headers: headers, params: body.to_json
+    post '/api/v1/users', headers: headers, params: body.to_json
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(400)
+
+    user = JSON.parse(response.body, symbolize_names: true)
+
+    expect(user[:email]).to eq(["has already been taken"])
+  end
+
+  it 'retunrs error when passwords dont match' do
+    body = {
+      "email": "whatever@example.com",
+      "password": "password",
+      "password_confirmation": "pasword"
+    }
+
+    headers = {
+      'Content-Type' => 'application/json',
+      'Accept' => 'application/json'
+    }
+
+    post '/api/v1/users', headers: headers, params: body.to_json
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(400)
+
+    user = JSON.parse(response.body, symbolize_names: true)
+
+    expect(user[:password_confirmation]).to eq(["doesn't match Password"])
+  end
+
+  it 'can return an error with missing field' do
+    body = {
+      "password": "password",
+      "password_confirmation": "password"
+    }
+
+    headers = {
+      'Content-Type' => 'application/json',
+      'Accept' => 'application/json'
+    }
+
+    post '/api/v1/users', headers: headers, params: body.to_json
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(400)
+
+    user = JSON.parse(response.body, symbolize_names: true)
+
+    expect(user[:email]).to eq(["can't be blank", "is invalid"])
+  end
 end
