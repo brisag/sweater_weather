@@ -6,6 +6,7 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
   end
 
   it 'can return road trip information', :vcr do
+    binding.pry
     params = {
       "origin": "Denver,CO",
       "destination": "Pueblo,CO",
@@ -123,6 +124,6 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
 
     trip = JSON.parse(response.body, symbolize_names: true)
 
-    expect(trip[:error]).to eq("invalid api_key")
+    expect(trip[:error]).to eq("Must provide valid API key")
   end
 end

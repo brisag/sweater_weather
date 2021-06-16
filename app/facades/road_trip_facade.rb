@@ -6,11 +6,11 @@ class RoadTripFacade
     directions = LocationService.get_duration(origin, destination)
 
     trip = {
-      start_city: origin,
-      end_city: destination,
-      total_time: directions[:route][:time],
-      weather: WeatherFacade.get_forecast(destination)
-    }
+              start_city: origin,
+              end_city: destination,
+              total_time: directions[:route][:time],
+              weather: WeatherFacade.get_forecast(destination)
+            }
 
     Trip.new(trip)
   end
