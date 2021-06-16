@@ -82,4 +82,37 @@ RSpec.describe 'Forecast API - Endpoints', type: :request do
     expect(hour).to have_key :icon
     expect(hour[:icon]).to be_a String
   end
+
+  describe "sad path" do
+    it "Won't return weather with empty location" do
+      params = ({
+                   location: ""
+                  })
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      get "/api/v1/forecast", headers: headers, params: params
+
+      error = JSON.parse(response.body, symbolize_names:true)
+      error_message = "Must provide location"
+
+      expect(response).to have_http_status(:bad_request)
+      expect(error).to have_key(:error)
+      expect(error[:error]).to eq("#{error_message}")
+    end
+
+    it "Won't return background with blank location" do
+      params = ({
+                  })
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      get "/api/v1/forecast", headers: headers, params: params
+
+      error = JSON.parse(response.body, symbolize_names:true)
+      error_message = "Must provide location"
+
+      expect(response).to have_http_status(:bad_request)
+      expect(error).to have_key(:error)
+      expect(error[:error]).to eq("#{error_message}")
+    end
+  end
 end
