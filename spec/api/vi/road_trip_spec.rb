@@ -11,12 +11,11 @@ RSpec.describe 'Road Trip Endpoint', type: :request do
     }
 
     headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
-    # binding.pry
 
     post "/api/v1/road_trip", headers: headers, params: params, as: :json
 
     expect(response).to be_successful
-    binding.pry
+
     expect(response.status).to eq(200)
     trip = JSON.parse(response.body, symbolize_names: true)
     expect(trip).to have_key(:data)

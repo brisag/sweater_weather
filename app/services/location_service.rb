@@ -14,7 +14,6 @@ class LocationService
         req.params['from'] = start
         req.params['to'] = destination
       end
-      # binding.pry
       parse_data(response)
     end
 
@@ -27,8 +26,3 @@ class LocationService
     end
   end
 end
-
-
-
-# http://www.mapquestapi.com/geocoding/v1/address?key=KEY&location=Washington,DC
-# https://developer.mapquest.com/documentation/directions-api/

@@ -17,7 +17,6 @@ class Trip
 		if @travel_time == "Impossible route"
 			{}
 		else
-      # binding.pry
 			@travel_time = @travel_time[:route][:formatted_time]
 			{
 				temperature: weather,
