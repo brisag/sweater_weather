@@ -212,11 +212,6 @@ In postman:
   3. Select `json` (by default show as `text`)
 
 
-<p align="center">
-<img src="set_body_to_json.png" width="500"><br/>
-<small>sample Postman setup</small>
-</p>
-
 
 ### Forecast
 
@@ -234,11 +229,6 @@ Request:
 
 </div><br/>
 
-
-<p align="center">
-<img src="forecast_request.png" width="500"><br/>
-<small>sample forecast request</small>
-</p>
 
 <div align="center">
 
@@ -265,10 +255,6 @@ Request:
 **get**  `api/v1/backgrounds?location=denver, co`
 </div><br/>
 
-<p align="center">
-<img src="backgrounds_request.png" width="500"><br/>
-<small>sample background request</small>
-</p>
 
 <div align="center">
 
@@ -306,11 +292,6 @@ The params are passed on in the body of the request not in the uri:
 **post**  `/api/v1/users`
 </div><br/>
 
-<p align="center">
-<img src="users_request.png" width="500"><br/>
-<small>sample users request</small>
-</p>
-
 [back to top](#table-of-contents)
 
 <div align="center">
@@ -341,12 +322,6 @@ Request:
 <div align="center">
 
 **post**  `/api/v1/sessions`
-
-</div><br/>
-<p align="center">
-<img src="login_request.png" width="500"><br/>
-<small>sample login request</small>
-</p>
 
 <div align="center">
 
@@ -380,11 +355,6 @@ Request:
 
 **post**  `/api/v1/road_trip`
 
-</div><br/>
-<p align="center">
-<img src="road_trip_request.png" width="500"><br/>
-<small>sample road_trip request</small>
-</p>
 
 <div align="center">
 
@@ -408,11 +378,6 @@ If you have postman installed locally you can run it in the app directly
 
 `https://sweater-weather-api-nico.herokuapp.com/api/v1/<type here the desired endpoint>`
 
-</div><br/>
-<p align="center">
-<img src="heroku_user_registration_sample.png" width="500"><br/>
-<small>Heroku-app user registration request</small>
-</p>
 
 [back to top](#table-of-contents)
 
